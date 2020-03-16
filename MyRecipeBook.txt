@@ -1,0 +1,8 @@
+My Cookbook Recipe App
+
+Login/Join
+Recent Recipes (Main)
+Recipe Index
+Recipe Submit
+Search
+Account Settings
