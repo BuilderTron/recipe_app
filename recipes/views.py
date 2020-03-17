@@ -3,6 +3,18 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
+
+# forms.py imports
+
+from .forms import CreateUserForm
+
+
+
+
+
+
+
 
 # Home page
 
@@ -23,20 +35,46 @@ def recipebook(request):
 
 # Sign up
 
+# def signupuser(request):
+#     if request.method == 'GET':
+#         return render(request, 'recipes/signupuser.html', {'form':UserCreationForm()})
+#     else:
+#         if request.POST['password1'] == request.POST['password2']:
+#             try:
+#                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+#                 user.save()
+#                 login(request, user)
+#                 return redirect('recipebook')
+#             except IntegrityError:
+#                 return render(request, 'recipes/signupuser.html', {'form':UserCreationForm(), 'error':'Username already taken. Please try again.'})
+#         else:
+#             return render(request, 'recipes/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match.'})
+
+
+
 def signupuser(request):
-    if request.method == 'GET':
-        return render(request, 'recipes/signupuser.html', {'form':UserCreationForm()})
-    else:
-        if request.POST['password1'] == request.POST['password2']:
-            try:
-                user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
-                user.save()
-                login(request, user)
+    form = CreateUserForm()
+
+    if request.method == 'POST':
+        # try:
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('first_name')
+
                 return redirect('recipebook')
-            except IntegrityError:
-                return render(request, 'recipes/signupuser.html', {'form':UserCreationForm(), 'error':'Username already taken. Please try again.'})
-        else:
-            return render(request, 'recipes/signupuser.html', {'form':UserCreationForm(), 'error':'Passwords did not match.'})
+                messages.success(request, 'Account was created for ' + user )
+        # except IntegrityError:
+        #     return render(request, 'recipes/signupuser.html', {'form':CreateUserForm(), 'error':'Username already taken. Please try again.'})
+
+    context = {'form':form}
+    return render(request, 'recipes/signupuser.html', context)
+
+
+
+
+
+
 
 
 

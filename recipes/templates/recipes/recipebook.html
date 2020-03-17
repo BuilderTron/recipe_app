@@ -1,6 +1,13 @@
 {% extends 'recipes/base.html' %}
 
 
+{% for message in messages %}
+  <p id="messages">{{ message }}</p>
+{% endfor %}
+
+
+<br>
+
 {% block content %}
 Recipes
 {% endblock %}
