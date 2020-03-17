@@ -1,0 +1,35 @@
+
+
+<!-- Login, logout, Signup forms -->
+
+{% if user.is_authenticated %}
+Logged In as {{ user.username }}
+
+<!-- Logout -->
+<form action="{% url 'logoutuser' %}" method="POST">
+  {% csrf_token %}
+  <button type="submit">Logout</button>
+</form>
+
+
+{% else %}
+
+<!-- Signup -->
+<a href="{% url 'signupuser' %}">Sign Up</a>
+
+
+
+<!-- Login -->
+<a href="{% url 'loginuser' %}">Login</a>
+
+{% endif %}
+
+<br>
+<br>
+
+
+<!-- Content that will be extended -->
+
+{% block content %}
+
+{% endblock %}
