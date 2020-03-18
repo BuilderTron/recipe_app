@@ -32,7 +32,6 @@ def recipebook(request):
 
 
 
-
 # Sign up
 
 # def signupuser(request):
@@ -72,19 +71,12 @@ def signupuser(request):
 
 
 
-
-
-
-
-
-
 # Logout
 
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)
         return redirect('home')
-
 
 
 
