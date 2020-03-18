@@ -12,10 +12,6 @@ from .forms import CreateUserForm
 
 
 
-
-
-
-
 # Home page
 
 def home(request):
