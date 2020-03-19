@@ -23,7 +23,6 @@ admin.site.register(Meal, MealAdmin)
 
 
 
-
 class RecipeAdmin(admin.ModelAdmin):
     readonly_fields = ('created',)
 
