@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.urls import path
 from recipes import views
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -35,6 +36,7 @@ urlpatterns = [
 
     path('', views.home, name='home'),
     path('recipes/', views.recipebook, name='recipebook'),
+    path('<int:recipe_id>/', views.solo, name='solo'),
 ]
 
 

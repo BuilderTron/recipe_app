@@ -39,13 +39,17 @@ class Meal(models.Model):
 class Recipe(models.Model):
 
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='recipes/images/')
+    image = models.ImageField(upload_to='recipes/images/', blank=True)
     url = models.URLField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,)
     daily_meals = ['Breakfast', 'Brunch', 'Elevenses', 'Lunch', 'Tea', 'Supper', 'Dinner']
     meal = models.ForeignKey(Meal, limit_choices_to={'name__in': daily_meals}, on_delete=models.CASCADE,)
+    image_ingerdients = models.ImageField(upload_to='recipes/images/', blank=True)
     ingredients = models.TextField(blank=True)
+    image_directions = models.ImageField(upload_to='recipes/images/', blank=True)
     directions = models.TextField(blank=True)
+    image_final = models.ImageField(upload_to='recipes/images/', blank=True)
+    serving_instructions = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

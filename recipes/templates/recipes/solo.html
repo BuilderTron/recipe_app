@@ -1,0 +1,26 @@
+
+
+
+
+
+
+
+
+<!-- FIXME: If certain recipes don't have images, fix to make viewable without certain fields completed. -->
+
+<h2>{{ recipe.title }}</h2>
+<h3>{{ recipe.category }}</h3>
+<h3>{{ recipe.meal }}</h3>
+<img src="{{ recipe.image.url }}">
+<br>
+<h4>Ingredients</h4>
+<img src="{{ recipe.image_ingerdients.url }}">
+<p>{{ recipe.ingredients }}</p>
+<br>
+<h4>Directions</h4>
+<img src="{{ recipe.image_directions.url }}">
+<p>{{ recipe.directions }}</p>
+<br>
+<h4>Serving Instructions</h4>
+<img src="{{ recipe.image_final.url }}">
+<p>{{ recipe.serving_instructions }}</p>

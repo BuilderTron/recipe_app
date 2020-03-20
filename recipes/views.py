@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
+
+# models.py imports
 
 from .models import Recipe
 
@@ -14,19 +16,31 @@ from .forms import CreateUserForm
 
 
 
+
+
+
+
+
 # Home page
 
 def home(request):
-    recipes = Recipe.objects.all()
-    return render(request, 'recipes/home.html', {'recipes':recipes})
+    # recipes = Recipe.objects.all()
+    return render(request, 'recipes/home.html')
 
 
 
 
-# Main home page
+# Recipe Library page
 
 def recipebook(request):
-    return render(request, 'recipes/recipebook.html')
+    recipes = Recipe.objects.order_by('-created')[:5]
+    return render(request, 'recipes/recipebook.html', {'recipes':recipes})
+
+
+# Solo recipe with instructions
+def solo(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    return render(request, 'recipes/solo.html', {'recipe':recipe})
 
 
 
