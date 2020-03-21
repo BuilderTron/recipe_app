@@ -15,37 +15,6 @@ from .forms import CreateUserForm
 
 
 
-
-
-
-
-
-
-# Home page
-
-def home(request):
-    # recipes = Recipe.objects.all()
-    return render(request, 'recipes/home.html')
-
-
-
-
-# Recipe Library page
-
-def recipebook(request):
-    recipes = Recipe.objects.order_by('-created')[:5]
-    return render(request, 'recipes/recipebook.html', {'recipes':recipes})
-
-
-# Solo recipe with instructions
-def solo(request, recipe_id):
-    recipe = get_object_or_404(Recipe, pk=recipe_id)
-    return render(request, 'recipes/solo.html', {'recipe':recipe})
-
-
-
-
-
 # Sign up
 
 def signupuser(request):
@@ -89,3 +58,29 @@ def loginuser(request):
         else:
             login(request, user)
             return redirect('recipebook')
+
+
+
+
+# Home page
+
+def home(request):
+    # recipes = Recipe.objects.all()
+    return render(request, 'recipes/home.html')
+
+
+
+
+# Recipe Library page
+
+def recipebook(request):
+    recipes = Recipe.objects.order_by('-created')[:5]
+    return render(request, 'recipes/recipebook.html', {'recipes':recipes})
+
+
+
+# Solo recipe with instructions
+
+def solo(request, recipe_id):
+    recipe = get_object_or_404(Recipe, pk=recipe_id)
+    return render(request, 'recipes/solo.html', {'recipe':recipe})

@@ -37,15 +37,17 @@ class Meal(models.Model):
 
 # Recipe Field
 class Recipe(models.Model):
-
     title = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='recipes/images/', blank=True)
+# TODO: Add default image if image is left blank
+    image = models.ImageField(default='recipes/default_img.gif', upload_to='recipes/images/', blank=True)
     url = models.URLField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,)
     daily_meals = ['Breakfast', 'Brunch', 'Elevenses', 'Lunch', 'Tea', 'Supper', 'Dinner']
     meal = models.ForeignKey(Meal, limit_choices_to={'name__in': daily_meals}, on_delete=models.CASCADE,)
-    image_ingerdients = models.ImageField(upload_to='recipes/images/', blank=True)
+
+    image_ingredients = models.ImageField(upload_to='recipes/images/', null=False, blank=True)
     ingredients = models.TextField(blank=True)
+
     image_directions = models.ImageField(upload_to='recipes/images/', blank=True)
     directions = models.TextField(blank=True)
     image_final = models.ImageField(upload_to='recipes/images/', blank=True)

@@ -1,12 +1,10 @@
+{% extends 'recipes/base.html' %}
+
+
+{% block content %}
 
 
 
-
-
-
-
-
-<!-- FIXME: If certain recipes don't have images, fix to make viewable without certain fields completed. -->
 
 <h2>{{ recipe.title }}</h2>
 <h3>{{ recipe.category }}</h3>
@@ -14,13 +12,25 @@
 <img src="{{ recipe.image.url }}">
 <br>
 <h4>Ingredients</h4>
-<img src="{{ recipe.image_ingerdients.url }}">
+
+{% if recipe.image_ingredients %}
+<img src="{{ recipe.image_ingredients.url }}">
+{% endif %}
 <p>{{ recipe.ingredients }}</p>
 <br>
+
 <h4>Directions</h4>
+{% if recipe.image_directions %}
 <img src="{{ recipe.image_directions.url }}">
+{% endif %}
 <p>{{ recipe.directions }}</p>
 <br>
+
 <h4>Serving Instructions</h4>
+{% if recipe.image_final %}
 <img src="{{ recipe.image_final.url }}">
+{% endif %}
 <p>{{ recipe.serving_instructions }}</p>
+
+
+{% endblock %}
