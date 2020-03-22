@@ -3,6 +3,9 @@ from .models import Recipe, Category, Meal
 
 
 
+# admin.site.register(Profile)
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
     prepopulated_fields = {'slug': ('name',)}

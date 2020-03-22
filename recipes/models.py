@@ -1,6 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.auth.models import User
+
+
+
+# User Profile
+#
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     image = models.ImageField(default='default_user.jpg', upload_to='recipes/users')
+#
+#     def __str__(self):
+#         return f'{self.user.username} Profile'
+
+
 
 
 
@@ -35,11 +48,17 @@ class Meal(models.Model):
         return self.name
 
 
+# Default Recipe images
+# 
+# class Defailt_img(models.Model):
+#     image = models.ImageField(default='recipes/default.png',upload_to='recipes/images/', blank=True)
+
+
 # Recipe Field
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
-# TODO: Add default image if image is left blank
-    image = models.ImageField(default='recipes/default_img.gif', upload_to='recipes/images/', blank=True)
+# FIXME: If default image is changed to user's upload but then deleted. Make default image reappear.
+    image = models.ImageField(default='recipes/default.png',upload_to='recipes/images/', blank=True)
     url = models.URLField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,)
     daily_meals = ['Breakfast', 'Brunch', 'Elevenses', 'Lunch', 'Tea', 'Supper', 'Dinner']
