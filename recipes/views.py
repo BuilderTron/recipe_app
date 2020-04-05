@@ -77,6 +77,10 @@ def recipebook(request):
     recipes = Recipe.objects.order_by('-created')[:5]
     return render(request, 'recipes/recipebook.html', {'recipes':recipes})
 
+# Image default_user
+# def get_the_image(request):
+#     get_images = Recipe.objects.all()
+#     return render(request, 'imageTemplate.html', {'get_images':get_images})
 
 
 # Solo recipe with instructions

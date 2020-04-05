@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-
+from django.conf import settings
 
 
 # User Profile
@@ -49,7 +49,7 @@ class Meal(models.Model):
 
 
 # Default Recipe images
-# 
+#
 # class Defailt_img(models.Model):
 #     image = models.ImageField(default='recipes/default.png',upload_to='recipes/images/', blank=True)
 
@@ -57,19 +57,19 @@ class Meal(models.Model):
 # Recipe Field
 class Recipe(models.Model):
     title = models.CharField(max_length=200)
+
 # FIXME: If default image is changed to user's upload but then deleted. Make default image reappear.
-    image = models.ImageField(default='recipes/default.png',upload_to='recipes/images/', blank=True)
+    image = models.ImageField(upload_to='recipes/images/', null=True, blank=True)
+
     url = models.URLField(blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE,)
     daily_meals = ['Breakfast', 'Brunch', 'Elevenses', 'Lunch', 'Tea', 'Supper', 'Dinner']
     meal = models.ForeignKey(Meal, limit_choices_to={'name__in': daily_meals}, on_delete=models.CASCADE,)
-
-    image_ingredients = models.ImageField(upload_to='recipes/images/', null=False, blank=True)
+    image_ingredients = models.ImageField(upload_to='recipes/images/', null=True, blank=True)
     ingredients = models.TextField(blank=True)
-
-    image_directions = models.ImageField(upload_to='recipes/images/', blank=True)
+    image_directions = models.ImageField(upload_to='recipes/images/', null=True, blank=True)
     directions = models.TextField(blank=True)
-    image_final = models.ImageField(upload_to='recipes/images/', blank=True)
+    image_final = models.ImageField(upload_to='recipes/images/', null=True, blank=True)
     serving_instructions = models.TextField(blank=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
